@@ -19,32 +19,37 @@ zsh
 
 **install zsh exctensions**
 
-*command syntax highlighting*
+command syntax highlighting
 
 ```shell
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
-*search command history*
+search command history
 
 ```shell
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 ```
 
-*spaceship prompt*
+spaceship prompt
 
 ```shell
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+git clone https://github.com/denysdovhan/spaceship-prompt.git \
+"$ZSH_CUSTOM/themes/spaceship-prompt"
+
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
+"$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 ```
 
-*install powerline fonts*
+install powerline fonts
 
 ```shell
 sudo apt install fonts-powerline
 ```
 
-**append ZSH_THEME="spaceship" in ~/.zshrc**
+Change ZSH_THEME string to ZSH_THEME="spaceship" in ~/.zshrc
 
 ```shell
 source ~/.zshrc
