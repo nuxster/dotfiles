@@ -2,14 +2,14 @@
 
 # zsh
 
-**install zsh**
+**Install zsh**
 
 ```shell
 sudo apt install zsh &&\
 sudo usermod -s /bin/zsh $USER
 ```
 
-**install oh-my-zsh**
+**Install oh-my-zsh**
 
 ```shell
 sudo apt install git &&\
@@ -17,23 +17,23 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 zsh
 ```
 
-**install zsh exctensions**
+**Install zsh exctensions**
 
-command syntax highlighting
+Command syntax highlighting
 
 ```shell
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
-search command history
+Search command history
 
 ```shell
 git clone https://github.com/zsh-users/zsh-autosuggestions \
 ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 ```
 
-spaceship prompt
+Spaceship prompt
 
 ```shell
 git clone https://github.com/denysdovhan/spaceship-prompt.git \
@@ -43,7 +43,7 @@ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
 "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 ```
 
-install powerline fonts
+Install powerline fonts
 
 ```shell
 sudo apt install fonts-powerline
