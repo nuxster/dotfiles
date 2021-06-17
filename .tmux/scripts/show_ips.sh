@@ -7,9 +7,9 @@ DEFAULT_COLOR='default'
 print_ip () {
 
 	if [ ${#1} -ge 7 ]; then
-		printf " $2: #[fg=$GREEN_COLOR]$1#[fg=$DEFAULT_COLOR] "
+		printf " $2 #[fg=$GREEN_COLOR]$1#[fg=$DEFAULT_COLOR] "
 	else
-		printf " $2: #[fg=$RED_COLOR]✘#[fg=$DEFAULT_COLOR]  "
+		printf " $2 #[fg=$RED_COLOR]✘#[fg=$DEFAULT_COLOR]  "
 	fi
 }
 
@@ -17,15 +17,13 @@ print_ip () {
 get_ip () {
 
 	LAN_IP=$(hostname -I | awk '{print $1}')
-
-	sleep 0.1
 	WAN_IP=$(curl -s -4 ifconfig.co 2>/dev/null)
 	
 	if [ $LAN_IP = $WAN_IP ]; then
-		print_ip $LAN_IP "ip"
+		print_ip $LAN_IP "ip:"
 	else
-		print_ip $LAN_IP "lan"
-		print_ip $WAN_IP "wan"
+		print_ip $LAN_IP "lan:"
+		print_ip $WAN_IP "wan:"
 	fi
 }	
 
