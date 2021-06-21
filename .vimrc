@@ -48,26 +48,26 @@ filetype plugin indent on    " required
 
 
 
-"""
+""" Other options
 
-" Цветовая схема
+" color scheme
 color desert
-" включить подсветку синтаксиса
+" syntax highlighting
 syntax enable
-" показывать номера строк
+" show line numbers 
 set number
-" установить tab равным 4 пробелам
+" Set tab to 4 spaces
 set ts=4
-" отступ при переходе на следующую строку при написании кода
+" indent on line break while writing code
 set autoindent
-" преобразование tab-ов в пробелы
+" converting tabs to spaces 
 set expandtab
-" при использовании команд >> или << сдвигать строки на 4 пробела
+" when using the >> or << commands, shift lines by 4 spaces 
 set shiftwidth=4
-" выделять строку, на которой находится курсор
+" highlight the line the cursor is on 
 "set cursorline
 "hi CursorLine ctermbg=235
-" показывать парную скобку для [] {} и ()
+" show paired parenthesis for [] {} and () 
 set showmatch
-" включить подсветку синтаксиса Python
+" enable Python syntax highlighting 
 let python_highlight_all = 1
