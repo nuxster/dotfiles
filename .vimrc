@@ -29,10 +29,46 @@ let g:airline_solarized_bg='dark'
 """
 " File manager
 Plugin 'preservim/nerdtree'
-map <F5> :NERDTreeToggle<CR>
+map <F12> :NERDTreeToggle<CR>
+Plugin 'ryanoasis/vim-devicons'
 """
 " Plugin for work with git
 Plugin 'tpope/vim-fugitive'
+"""
+" Code folding
+Plugin 'tmhedberg/SimpylFold'
+let g:SimpylFold_docstring_preview=1
+"""
+" Code auto-complete
+"
+" cd ~/.vim/bundle/YouCompleteMe
+" apt install build-essential cmake python3-dev
+" python3 install.py --clang-completer --js-completer
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"""
+" Check syntax
+Plugin 'vim-syntastic/syntastic'
+"""
+" Check PEP8
+Plugin 'nvie/vim-flake8'
+"""
+" Code comments
+"
+" gcc - comment line
+" gc in visual mode - comment select block
+Plugin 'tomtom/tcomment_vim'
+"""
+" Multiple cursors
+"Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mg979/vim-visual-multi'
+"""
+" Color scheme
+Plugin 'morhetz/gruvbox'
+" cp -R ~/.vim/bundle/gruvbox/colors/ ~/.vim/
+set background=dark
+color gruvbox
 
 
 " All of your Plugins must be added before the following line
@@ -46,12 +82,10 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 
-
-
 """ Other options
 
-" color scheme
-color desert
+" enable mouse use in all modes
+set mouse=a
 " syntax highlighting
 syntax enable
 " show line numbers 
@@ -69,5 +103,15 @@ set shiftwidth=4
 "hi CursorLine ctermbg=235
 " show paired parenthesis for [] {} and () 
 set showmatch
+" line ending format
+set fileformat=unix
+" file encoding
+set encoding=utf-8
 " enable Python syntax highlighting 
 let python_highlight_all = 1
+
+
+""" My HotKeys
+
+" 
+
