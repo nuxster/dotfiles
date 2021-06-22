@@ -110,8 +110,3 @@ set encoding=utf-8
 " enable Python syntax highlighting 
 let python_highlight_all = 1
 
-
-""" My HotKeys
-
-" 
-

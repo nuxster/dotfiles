@@ -87,3 +87,19 @@ Press prefix + alt + u (lowercase u as in uninstall) to remove the plugin.
 Press prefix + alt + u.
 ```
 
+# vim
+
+**Plugins**
+
+```shell
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+```shell
+:so $MYVIMRC
+:VundleInstall
+```
+
+
+
+
