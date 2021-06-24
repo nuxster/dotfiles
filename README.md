@@ -87,7 +87,14 @@ Press prefix + alt + u (lowercase u as in uninstall) to remove the plugin.
 Press prefix + alt + u.
 ```
 
-# vim
+# neovim
+
+**Install neovim**
+
+```shell
+apt purge --auto-remove vim
+apt install nevim
+```
 
 **Plugins**
 
@@ -100,6 +107,8 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 :VundleInstall
 ```
 
-
+```shell
+cp -R .vim/bundle/gruvbox/colors ~/.config/nvim
+```
 
 
