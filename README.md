@@ -41,15 +41,11 @@ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
 "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 ```
 
-Install powerline fonts
+Install fonts
 
 ```shell
-sudo apt install fonts-powerline
-```
-
-Change ZSH_THEME string to ZSH_THEME="spaceship" in ~/.zshrc
-
-```shell
+sudo apt install fonts-powerline fonts-firacode
+sed -i -r 's/^ZSH_THEME=.*/ZSH_THEME=\"spaceship\"/g' ~/.zshrc
 source ~/.zshrc
 ```
 
