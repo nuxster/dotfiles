@@ -99,7 +99,7 @@ Press prefix + alt + u.
 
 ```shell
 apt purge --auto-remove vim
-apt install nevim
+apt install neovim
 ```
 
 **Plugins**
