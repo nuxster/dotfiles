@@ -31,6 +31,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions \
 ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 ```
 
+Install packages for plugins
+
+```shell
+sudo apt install grc chroma command-not-found
+```
+
 Spaceship prompt
 
 ```shell
