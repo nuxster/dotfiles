@@ -45,6 +45,10 @@ Install fonts
 
 ```shell
 sudo apt install fonts-powerline fonts-firacode
+```
+
+Change theme
+```shell
 sed -i -r 's/^ZSH_THEME=.*/ZSH_THEME=\"spaceship\"/g' ~/.zshrc
 source ~/.zshrc
 ```
