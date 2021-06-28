@@ -161,7 +161,8 @@ alias auu="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade && sudo 
 
 # other
 alias mc="mc -S gotar"
-alias rg="ranger"
+#alias rg="ranger"
+alias rg='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`busybox cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias unp="udisksctl unmount -b $1 && udisksctl power-off -b $1"
 
 # autorun byobu and connect to old session

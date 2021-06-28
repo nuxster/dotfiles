@@ -119,7 +119,7 @@ filetype plugin indent on    " required
  
 """ Other options
 
-"
+" system clipboard
 set clipboard=unnamedplus
 " enable mouse use in all modes
 set mouse=a
