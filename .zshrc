@@ -68,9 +68,14 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting grc colorize command-not-found)
 source $ZSH/oh-my-zsh.sh
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Plugin colorize
+ZSH_COLORIZE_TOOL=chroma
+ZSH_COLORIZE_STYLE="solarized-dark256"
+ZSH_COLORIZE_CHROMA_FORMATTER=terminal16m
 
 # apt install zsh-autosuggestions 
 source $(dpkg -L zsh-autosuggestions | grep 'zsh$')
@@ -114,18 +119,21 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # highlighting command output
-[[ -f /usr/bin/grc ]] && {
- alias ping="grc --colour=auto ping"
+#[[ -f /usr/bin/grc ]] && {
+ #alias ping="grc --colour=auto ping"
  #alias traceroute="grc --colour=auto traceroute"
- alias make="grc --colour=auto make"
- alias diff="grc --colour=auto diff"
- alias cvs="grc --colour=auto cvs"
+ #alias make="grc --colour=auto make"
+ #alias diff="grc --colour=auto diff"
+ #alias cvs="grc --colour=auto cvs"
  #alias netstat="grc --colour=auto netstat"
-}
+#}
 
-alias cat="grc cat"
-alias tail="grc tail"
-alias head="grc head"
+#alias cat="grc cat"
+#alias tail="grc tail"
+#alias head="grc head"
+
+alias cat="ccat"
+alias less="cless"
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -187,3 +195,6 @@ if ps $PPID |grep mc; then
 	fi
 fi
 
+# MYVAR
+export EDITOR='nvim'
+export VISUAL='nvim'
