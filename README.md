@@ -50,7 +50,7 @@ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
 Install fonts
 
 ```shell
-sudo apt install fonts-powerline fonts-firacode
+sudo apt install fonts-powerline fonts-symbola fonts-firacode
 ```
 
 Change theme
