@@ -165,7 +165,7 @@ set mouse=a
 syntax enable
 " show line numbers 
 set number
-" draw vertical line after 80 chars
+" draws vertical line after 80 chars
 set colorcolumn=80
 " Set tab to 4 spaces
 set ts=4
