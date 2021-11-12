@@ -12,9 +12,18 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 """
-" This plugin highlights the line of the cursor, only in the current window. The colors change according to the mode (normal/insert)
+" This plugin highlights the line of the cursor, only in the current window.
+" The colors change according to the mode (normal/insert)
 Plugin 'miyakogi/conoline.vim.git'
 let g:conoline_auto_enable = 1
+
+"""
+" Indent Guides is a plugin for visually displaying indent levels in Vim.
+Plugin 'nathanaelkane/vim-indent-guides.git'
+let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
 """
 " Status and tab modern bar
@@ -47,13 +56,33 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'jeetsukumaran/vim-buffergator'
 
 """
+" Scrollbar
+Plugin 'dstein64/nvim-scrollview.git'
+
+"""
 " Plugin for work with git
 Plugin 'tpope/vim-fugitive'
 
 """
+" Insert or delete brackets, parens, quotes in pair.
+Plugin 'jiangmiao/auto-pairs'
+
+"""
+" Plugin lets you deal with pairs of things surrounding things.
+" in visualmode - vS'
+" surround one word - ysiw'
+" surround line - yss'
+" delete surrounds - ds'
+" delete surround tags - dstdst
+" change surrounds - cs'*
+" change surrounds tags - cst<tag>
+Plugin 'tpope/vim-surround'
+
+
+"""
 " Code folding
-Plugin 'tmhedberg/SimpylFold'
-let g:SimpylFold_docstring_preview=1
+"Plugin 'tmhedberg/SimpylFold'
+"let g:SimpylFold_docstring_preview=1
 
 """
 " Code auto-complete
@@ -97,10 +126,19 @@ Plugin 'mg979/vim-visual-multi'
 """
 " Color scheme
 Plugin 'morhetz/gruvbox'
-" cp -R ~/.vim/bundle/gruvbox/colors/ ~/.vim/
-set background=dark
-color gruvbox
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'mangeshrex/uwu.vim'
 
+" cp -R ~/.vim/bundle/gruvbox/colors/ ~/.vim/
+color gruvbox
+" color codedark
+" color uwu
+
+"Plugin 'dracula/vim', { 'name': 'dracula' }
+"colorscheme dracula
+
+
+set background=dark
 """
 " Start screen
 Plugin 'mhinz/vim-startify'
@@ -115,7 +153,7 @@ filetype plugin indent on    " required
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-  
+ 
  
 """ Other options
 
@@ -127,6 +165,8 @@ set mouse=a
 syntax enable
 " show line numbers 
 set number
+" draw vertical line after 80 chars
+set colorcolumn=80
 " Set tab to 4 spaces
 set ts=4
 " indent on line break while writing code
@@ -147,3 +187,15 @@ set encoding=utf-8
 " enable Python syntax highlighting 
 let python_highlight_all = 1
 
+
+""" Hotkeys
+" buffers
+map <leader>n :bn!<cr>
+map <leader>p :bp!<cr>
+map <leader>s :w<cr>:bd<cr>
+map <leader>q :bd<cr>
+map <leader>N :tabnew<cr>
+" copy to clipboard
+nnoremap  <leader>y  "+y
+" past from clipboard
+nnoremap <leader>p "+p
