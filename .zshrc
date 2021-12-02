@@ -9,6 +9,13 @@ export ZSH=$HOME/.oh-my-zsh
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="spaceship"
+#ZSH_THEME="dracula"
+
+# SPACESHIP_RUBY_SYMBOL="💎 "
+# SPACESHIP_GOLANG_SYMBOL="🐹 "
+# SPACESHIP_PHP_SYMBOL="🐘 "
+# SPACESHIP_DOCKER_SYMBOL="🐳 "
+# SPACESHIP_PYENV_SYMBOL="🐍 "
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -166,6 +173,11 @@ alias mc="mc -S gotar"
 #alias rg="ranger"
 alias rg='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`busybox cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias unp="udisksctl unmount -b $1 && udisksctl power-off -b $1"
+# MS VScode
+#alias code="bash -c code"
+alias code="code --disable-gpu"
+
+#exec --no-startup-id i3-msg "1; exec /usr/bin/firefox"
 
 # autorun byobu and connect to old session
 :<< comments
@@ -183,8 +195,6 @@ comments
 #        fi
 #fi
 
-# autorun tmux, for UID != 0
-if [ $EUID -ne 0 ] && [ "$TMUX" = "" ]; then exec tmux; fi
 
 # do not output an error if the template matches  (ls *)
 setopt +o nomatch
@@ -196,5 +206,11 @@ if ps $PPID |grep mc; then
 	else
 		PROMPT=$'➜ '
 	fi
+fi
+
+# autorun tmux, for UID != 0 (without VScode env error)
+if [[ $EUID -ne 0 ]] && [[ "$TMUX" == "" ]] \
+    && ! pstree -s $$ | grep -Ewq "code|n?vim"; then
+    exec tmux; 
 fi
 
