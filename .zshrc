@@ -176,6 +176,10 @@ alias unp="udisksctl unmount -b $1 && udisksctl power-off -b $1"
 # MS VScode
 #alias code="bash -c code"
 alias code="code --disable-gpu"
+# Wireguard
+alias wgup="sudo wg-quick up"
+alias wgdown="sudo wg-quick down"
+alias wgshow="sudo wg show"
 
 #exec --no-startup-id i3-msg "1; exec /usr/bin/firefox"
 
