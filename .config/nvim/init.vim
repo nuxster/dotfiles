@@ -105,7 +105,7 @@ Plug 'tomtom/tcomment_vim'
 " q            - skip current and get next occurrence
 " Q            - remove current cursor/selection
 " i, I, a, A   - start insert mode
-Plug 'mg979/vim-visual-multi'     
+Plug 'mg979/vim-visual-multi'
 
 " Marks
 " mx  - Toggle mark 'x' and display it in the leftmost column
@@ -129,8 +129,10 @@ Plug 'morhetz/gruvbox'
 " Start screen
 Plug 'mhinz/vim-startify'
 
-
 """ Plugins for programming
+
+" A class outline viewer
+" Plug 'preservim/tagbar'
 
 " Markdown
 Plug 'ellisonleao/glow.nvim'
@@ -155,6 +157,9 @@ Plug 'saadparwaiz1/cmp_luasnip'
 
 " JS support
 Plug 'yuezk/vim-js'
+
+" Color name highlighter in CSS
+Plug 'ap/vim-css-color'
 
 
 """ Initialize plugin system
@@ -200,6 +205,9 @@ let g:airline_solarized_bg='dark'
 " Color scheme
 colorscheme gruvbox
 noremap <leader>m :Glow<CR>
+
+" Tagbar
+" nmap <F6> :TagbarToggle<CR>
 
 " Markdown
 let g:glow_style = "dark"
