@@ -1,0 +1,29 @@
+configuration {
+  font:                  "Source Code Pro Bold 14";
+  show-icons:            true;
+  icon-theme:            "Qogir-dark";
+  drun-display-format:   "{name}";
+  disable-history:       false;
+  /* fullscreen:            false; */
+  /* hide-scrollbar:        true; */
+  sidebar-mode:          false;
+
+  drun {
+    display-name: "->";
+  }
+
+  run {
+    display-name: "->";
+  }
+
+  window {
+    display-name: "->";
+  }
+
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
+}
+
+@theme "/home/nuxster/.config/rofi/themes/Midnight.rasi"
