@@ -795,7 +795,7 @@ awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru &")
 -- awful.spawn.with_shell("xscreensaver -no-splash &") 
 -- awful.spawn.with_shell("parcellite &") 
 awful.spawn.with_shell("nm-applet &") 
-awful.spawn.with_shell("blueman-tray &") 
+awful.spawn.with_shell("blueman-applet &") 
 -- awful.spawn.with_shell("udiskie_processes=$(ps aux | grep udiskie | wc -l) && if [[ $udiskie_processes -lt 2 ]]; then udiskie -n -a & fi") 
 awful.spawn.with_shell("/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh &") 
 -- Screen layout
