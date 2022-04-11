@@ -9,15 +9,15 @@ configuration {
   sidebar-mode:          false;
 
   drun {
-    display-name: "->";
+    display-name: "➜";
   }
 
   run {
-    display-name: "->";
+    display-name: "➜";
   }
 
   window {
-    display-name: "->";
+    display-name: "➜";
   }
 
   timeout {
