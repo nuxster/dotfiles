@@ -1,3 +1,7 @@
+![screen-1](screen-1.png)
+
+![screen-2](screen-2.png)
+
 # zsh
 
 **Install zsh**
