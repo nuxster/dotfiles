@@ -65,11 +65,12 @@ icon_bat_full    = " "
 icon_bat_half    = " "
 icon_bat_quarter = " "
 icon_bat_empty   = " "
+icon_keyboard    = " "
 
 -- Symbols
 symbol_light   = "⚡"
-symbol_percent = "٪ "
-symbol_celsius = "°C " 
+symbol_percent = "٪"
+symbol_celsius = "°C" 
 
 -- Mem widget
 memwidget = wibox.widget.textbox()
@@ -156,7 +157,7 @@ volwidget:buttons(awful.util.table.join(
 ))
 
 -- Battery widget
-batterywidget = wibox.widget.textbox()    
+batterywidget = wibox.widget.textbox()
 batterywidget:set_font("Source Code Pro Medium 12")
 vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 	local status = args[1] 
@@ -182,11 +183,6 @@ vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 	return "  " .. bat_icon .. status .. percent .. symbol_percent
 
 	end, 1.5, "BAT0")
-
-
--- Load Debian menu entries
--- local debian = require("debian.menu")
--- local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -237,62 +233,14 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    -- awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
--- {{{ Menu
--- Create a launcher widget and a main menu
---myawesomemenu = {
---   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
---   { "manual", terminal .. " -e man awesome" },
---   { "edit config", editor_cmd .. " " .. awesome.conffile },
---   { "restart", awesome.restart },
---   { "quit", function() awesome.quit() end },
---}
-
---local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
---local menu_terminal = { "open terminal", terminal }
-
---if has_fdo then
---    mymainmenu = freedesktop.menu.build({
---        before = { menu_awesome },
---        after =  { menu_terminal }
---    })
---else
-    -- mymainmenu = awful.menu({
-    --    items = {
-    --              menu_awesome,
-    --              { "Debian", debian.menu.Debian_menu.Debian },
-    --              menu_terminal,
-    --            }
-    --})
---end
-
-
---mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                     menu = mymainmenu })
-
--- Menubar configuration
--- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
+-- Keyboard map indicator and switcher.python_history
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
@@ -308,37 +256,15 @@ local taglist_buttons = gears.table.join(
                                                   client.focus:move_to_tag(t)
                                               end
                                           end),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, function(t)
-                                              if client.focus then
-                                                  client.focus:toggle_tag(t)
-                                              end
-                                          end),
+                   awful.button({ }, 3, awful.tag.viewtoggle),
+                   awful.button({ modkey }, 3, function(t)
+                                             if client.focus then
+                                                 client.focus:toggle_tag(t)
+                                             end
+                                         end),
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
-
---local tasklist_buttons = gears.table.join(
---                     awful.button({ }, 1, function (c)
---                                              if c == client.focus then
---                                                  c.minimized = true
---                                              else
---                                                  c:emit_signal(
---                                                      "request::activate",
---                                                      "tasklist",
---                                                      {raise = true}
---                                                  )
---                                              end
---                                          end),
---                     awful.button({ }, 3, function()
---                                              awful.menu.client_list({ theme = { width = 250 } })
---                                          end),
---                     awful.button({ }, 4, function ()
---                                              awful.client.focus.byidx(1)
---                                          end),
---                     awful.button({ }, 5, function ()
---                                              awful.client.focus.byidx(-1)
---                                          end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -382,13 +308,6 @@ awful.screen.connect_for_each_screen(function(s)
 	}
     }
 
-    -- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist {
-    --    screen  = s,
-    --    filter  = awful.widget.tasklist.filter.currenttags,
-    --    buttons = tasklist_buttons
-    --}
-
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
@@ -403,27 +322,20 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
+      spacing = 10,
 	    memwidget,
 	    tempwidget,
 	    fswidget,
 	    volwidget,
 	    batterywidget, 
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            mytextclock,
-	    wibox.layout.margin(wibox.widget.systray(), 5, 5, 5, 5),
-            wibox.layout.margin(s.mylayoutbox, 4, 4, 4, 4),
-        },
+      layout = wibox.layout.fixed.horizontal,
+      mykeyboardlayout,
+      mytextclock,
+	    wibox.container.margin(wibox.widget.systray(), 6, 6, 6, 6),
+      wibox.container.margin(s.mylayoutbox, 4, 4, 4, 4),
+      },
     }
 end)
--- }}}
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
 -- }}}
 
 -- {{{ Key bindings
@@ -449,25 +361,23 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    --
-    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-    --          {description = "show main menu", group = "awesome"}),
 
     -- Make screenshots
     -- screenshot = os.getenv("HOME") .. "/Images/Screenshots/$(date +%F_%T).png"
     awful.key({ modkey, "Ctrl" }, "p", function () 
-	    scrot("scrot -e 'xclip -selection c -t image/png < $f'", scrot_callback, "Take a screenshot") end,
+	    scrot("scrot -z -e 'xclip -selection c -t image/png < $f'", scrot_callback, "Take a screenshot") end,
               {description = "interactively choose a window or rectangle with the mouse", group = "screenshot"}),
 
     awful.key({ "Ctrl", "Shift" }, "p", function () 
-	    scrot("scrot -s -e 'xclip -selection c -t image/png < $f'", scrot_callback, "Take a screenshot of selection") end,
+	    scrot("scrot -z -f -s -e 'xclip -selection c -t image/png < $f'", scrot_callback, "Take a screenshot of selection") end,
               {description = "interactively choose a window or rectangle with the mouse", group = "screenshot"}),
 
     -- Lock screen
     awful.key({ modkey, "Ctrl" }, "l", function () 
 	    --awful.util.spawn_with_shell("~/.config/awesome/locker") end,
-              awful.util.spawn("sync")
-              awful.util.spawn("xautolock -locknow")
+              -- awful.util.spawn("sync")
+              -- awful.util.spawn("xautolock -locknow")
+                awful.util.spawn("dm-tool lock")
       end,
     	{description = "Lock screen", group = "awesome"}),
 
@@ -492,7 +402,6 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-
 
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
@@ -535,20 +444,6 @@ globalkeys = gears.table.join(
               {description = "run prompt", group = "launcher"}),
     -- Rofi
     awful.key({ modkey, "Shift" }, "r", function () awful.util.spawn("rofi -show drun") end)
-
-    -- awful.key({ modkey }, "x",
-    --          function ()
-    --              awful.prompt.run {
-    --                prompt       = "Run Lua code: ",
-    --                textbox      = awful.screen.focused().mypromptbox.widget,
-    --                exe_callback = awful.util.eval,
-    --                history_path = awful.util.get_cache_dir() .. "/history_eval"
-    --              }
-    --          end,
-    --          {description = "lua execute prompt", group = "awesome"})
-    -- Menubar
-    -- awful.key({ modkey }, "p", function() menubar.show() end,
-    --          {description = "show the menubar", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -653,6 +548,9 @@ clientbuttons = gears.table.join(
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.move(c)
     end),
+    awful.button({ }, 2, function (c)
+        c:emit_signal("request::activate", "mouse_click", {raise = true})
+    end),
     awful.button({ modkey }, 3, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.resize(c)
@@ -753,31 +651,6 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
-
---    awful.titlebar(c) : setup {
---        { -- Left
---            awful.titlebar.widget.iconwidget(c),
---            buttons = buttons,
---            layout  = wibox.layout.fixed.horizontal
---        },
---        { -- Middle
---            { -- Title
---                align  = "center",
---                widget = awful.titlebar.widget.titlewidget(c)
---            },
---            buttons = buttons,
---            layout  = wibox.layout.flex.horizontal
---        },
---        { -- Right
---            awful.titlebar.widget.floatingbutton (c),
---            awful.titlebar.widget.maximizedbutton(c),
---            awful.titlebar.widget.stickybutton   (c),
---            awful.titlebar.widget.ontopbutton    (c),
---            awful.titlebar.widget.closebutton    (c),
---            layout = wibox.layout.fixed.horizontal()
---        },
---        layout = wibox.layout.align.horizontal
---    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -790,14 +663,12 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- {{{ Autorun
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
--- awful.spawn.with_shell("numlockx &")
 awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru &") 
--- awful.spawn.with_shell("xscreensaver -no-splash &") 
--- awful.spawn.with_shell("parcellite &") 
 awful.spawn.with_shell("nm-applet &") 
 awful.spawn.with_shell("blueman-applet &") 
--- awful.spawn.with_shell("udiskie_processes=$(ps aux | grep udiskie | wc -l) && if [[ $udiskie_processes -lt 2 ]]; then udiskie -n -a & fi") 
 awful.spawn.with_shell("/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh &") 
 -- Screen layout
-awful.spawn.with_shell("~/.screenlayout/home.sh") 
+awful.spawn.with_shell("~/.screenlayout/home.sh &") 
+-- Compositor
+awful.spawn.with_shell("compton -b -c --backend xrender --vsync none &") 
 -- }}}
