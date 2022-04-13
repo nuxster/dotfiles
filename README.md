@@ -1,10 +1,10 @@
-![screen-1](screen-1.png)
+![screen-1](screens/screen-1.png)
 
-![screen-2](screen-2.png)
+![screen-2](screens/screen-2.png)
 
-![screen-3](screen-3.png)
+![screen-3](screens/screen-3.png)
 
-![screen-4](screen-4.png)
+![screen-4](screens/screen-4.png)
 
 # zsh
 
