@@ -105,7 +105,6 @@ tempwidget:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("psensor", true) end)
 ))
 
-
 -- Root usage widget
 fswidget = wibox.widget.textbox()
 fswidget:set_font("Source Code Pro Medium 12")
@@ -183,6 +182,11 @@ vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 	return "  " .. bat_icon .. status .. percent .. symbol_percent
 
 	end, 1.5, "BAT0")
+
+batterywidget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function () awful.util.spawn("xfce4-power-manager-settings", false) 
+    end)
+))
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -340,6 +344,12 @@ end)
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    -- Brightness
+    -- awful.key({ }, "XF86MonBrightnessDown", function ()
+    --     awful.util.spawn("xbacklight -dec 15") end),
+    -- awful.key({ }, "XF86MonBrightnessUp", function ()
+    --     awful.util.spawn("xbacklight -inc 15") end),
+
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -671,4 +681,6 @@ awful.spawn.with_shell("/usr/bin/gnome-keyring-daemon --start --components=gpg,p
 awful.spawn.with_shell("~/.screenlayout/home.sh &") 
 -- Compositor
 awful.spawn.with_shell("compton -b -c --backend xrender --vsync none &") 
+-- Power manager
+awful.spawn.with_shell("xfce4-power-manager &") 
 -- }}}
