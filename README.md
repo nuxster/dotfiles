@@ -38,8 +38,8 @@ Before=suspend.target
 [Service]
 User=%i
 Type=forking
-Environment=DISPLAY=":0"
-ExecStart=dm-tool lock
+Environment=XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+ExecStart=/usr/bin/dm-tool lock
 
 [Install]
 WantedBy=supend.target
