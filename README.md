@@ -49,6 +49,39 @@ WantedBy=supend.target
 systemctl enable wakelock@<YOUR USERNAME>.service && systemctl daemon-reload
 ```
 
+```shell
+cat > /usr/share/applications/poweroff.desktop
+
+[Desktop Entry]
+Name=poweroff
+Comment=Power off
+Exec=sudo poweroff
+Icon=system-shutdown
+Type=Application
+```
+
+```shell
+cat > /usr/share/applications
+
+[Desktop Entry]
+Name=reboot
+Comment=Reboot system
+Exec=sudo reboot
+Icon=system-reboot
+Type=Application
+```
+
+```shell
+cat > /usr/share/applications/suspend.desktop
+
+[Desktop Entry]
+Name=suspend
+Comment=Suspend system
+Exec=systemctl suspend
+Icon=system-suspend
+Type=Application
+```
+
 # zsh
 
 **Install zsh**
