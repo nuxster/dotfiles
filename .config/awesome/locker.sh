@@ -6,5 +6,5 @@ revert() {
 
 trap revert HUP INT TERM
 xset +dpms dpms 5 5 5
-i3lock -n -c 535d6c
+dm-tool lock
 revert

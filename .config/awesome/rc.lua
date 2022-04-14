@@ -183,10 +183,10 @@ vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 
 	end, 1.5, "BAT0")
 
-batterywidget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("xfce4-power-manager-settings", false) 
-    end)
-))
+-- batterywidget:buttons(awful.util.table.join(
+--     awful.button({ }, 1, function () awful.util.spawn("sudo powertop", false) 
+--     end)
+-- ))
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -681,6 +681,4 @@ awful.spawn.with_shell("/usr/bin/gnome-keyring-daemon --start --components=gpg,p
 awful.spawn.with_shell("~/.screenlayout/home.sh &") 
 -- Compositor
 awful.spawn.with_shell("compton -b -c --backend xrender --vsync none &") 
--- Power manager
-awful.spawn.with_shell("xfce4-power-manager &") 
 -- }}}
