@@ -50,6 +50,19 @@ systemctl enable wakelock@<YOUR USERNAME>.service && systemctl daemon-reload
 ```
 
 ```shell
+cat > /lib/systemd/system-sleep/blank
+
+#!/usr/bin/env bash
+
+if [ "$1" == "pre" ]; then
+  sleep 2
+fi
+
+
+sudo chmod +x /lib/systemd/system-sleep/blank
+```
+
+```shell
 cat > /usr/share/applications/poweroff.desktop
 
 [Desktop Entry]
