@@ -20,5 +20,7 @@ if [[ $udiskie_processes -lt 2 ]]; then
 fi
 
 # Auto lock screen
-LOCK_AFTER=10
-exec xautolock -detectsleep -time $LOCK_AFTER -locker "~/.config/awesome/locker.sh"
+# LOCK_AFTER=10
+# exec xautolock -detectsleep \
+#   -time $LOCK_AFTER 
+#   -locker "~/.config/awesome/locker.sh"
