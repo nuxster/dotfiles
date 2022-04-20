@@ -21,16 +21,20 @@ require("awful.hotkeys_popup.keys")
 local vicious = require("vicious")
 
 -- Software
-terminal     = "kitty"
-disk_utility = "gnome-disks"
-editor       = os.getenv("EDITOR") or "vim"
-browser      = "firefox-esr"
+terminal         = "kitty"
+disk_utility     = "gnome-disks"
+editor           = os.getenv("EDITOR") or "vim"
+editor_cmd       = terminal .. " -e " .. editor
+browser          = "firefox-esr"
+
+-- for Awesome WM scripts
+awful.util.shell = "bash"
+awful.shell      = "bash"
 
 -- Functions
-
 -- for screenshot
 function scrot(cmd, callback, args)
-  awful.util.spawn_with_shell(cmd)
+  awful.spawn(cmd)
   callback(args)
 end
     
@@ -70,7 +74,11 @@ icon_keyboard    = " "
 -- Symbols
 symbol_light   = "⚡"
 symbol_percent = "٪"
-symbol_celsius = "°C" 
+symbol_celsius = "°C"
+
+-- Units
+gb_unit = "Gb"
+mb_unit = "Mb"
 
 -- Mem widget
 memwidget = wibox.widget.textbox()
@@ -79,7 +87,7 @@ vicious.cache(vicious.widgets.mem)
 vicious.register(memwidget, vicious.widgets.mem, "  " .. icon_memory .. "$1" .. symbol_percent, 13)
 memwidget:buttons(
 	awful.util.table.join(
-		awful.button({ }, 1, function () awful.util.spawn( terminal .. " -e htop")   end)
+		awful.button({ }, 1, function () awful.spawn(terminal .. " -e htop")   end)
 	)
 )
 
@@ -88,40 +96,45 @@ tempwidget = wibox.widget.textbox()
 tempwidget:set_font("Source Code Pro Medium 12")
 vicious.register(tempwidget, vicious.widgets.thermal, function (widget, args)
 	local temp = args[1]
-	if  temp > 65 and temp <= 75 then
-		temp = color_warning .. temp .. color_close 	
+  if  temp > 65 and temp <= 75 then
+    temp = color_warning .. temp .. color_close 	
 	elseif temp > 75 and temp <= 80 then
-		temp = color_error .. temp .. color_close 	
+    temp = color_error .. temp .. color_close 	
 	elseif temp > 80 then
 		-- naughty.notify({ title = "Temperature Warning", text = "Running hot! " .. args[1] .. "°C!\nTake it easy.", timeout = 10, position = "top_right", fg = beautiful.fg_urgent, bg = beautiful.bg_urgent })
-		temp = color_error .. temp .. color_close 	
+    temp = color_error .. temp .. color_close 	
 	else
-		temp = color_normal .. temp .. color_close 	
+    temp = color_normal .. temp .. color_close 	
 	return "  " .. icon_temp .. " " .. temp .. symbol_celsius
 	end
-    end, 19, "thermal_zone0" )
+end, 19, "thermal_zone0" )
 
 tempwidget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("psensor", true) end)
+    awful.button({ }, 1, function () awful.spawn("psensor", true) end)
 ))
 
 -- Root usage widget
 fswidget = wibox.widget.textbox()
 fswidget:set_font("Source Code Pro Medium 12")
 vicious.register(fswidget, vicious.widgets.fs, function (widget, args)
-	local root_fs = args["{/ used_p}"]
-        if root_fs > 85 and root_fs <= 95 then
-		root_fs = color_warning .. root_fs .. color_close
-        elseif root_fs > 95 then
-		root_fs = color_error .. root_fs .. color_close
-        else
-		root_fs = color_normal .. root_fs .. color_close
-	return "  " .. icon_disk .. root_fs .. symbol_percent
-        end
-    end, 620)
+  local root_fs       = args["{/ used_p}"]
+  -- local root_fs_full  = args["{/ size_gb}"] .. gb_unit
+
+  if root_fs > 85 and root_fs <= 95 then
+    root_fs = color_warning .. root_fs .. color_close
+  elseif root_fs > 95 then
+    root_fs = color_error .. root_fs .. color_close
+  else
+    root_fs = color_normal .. root_fs .. color_close
+
+  -- return "  " .. icon_disk .. root_fs .. symbol_percent .. "/" .. root_fs_full
+  return "  " .. icon_disk .. root_fs .. symbol_percent
+  end
+end, 620)
+
 fswidget:buttons(
 	awful.util.table.join(
-		awful.button({ }, 1, function () awful.util.spawn( disk_utility, { floating = true } )   end)
+		awful.button({ }, 1, function () awful.spawn( disk_utility, { floating = true } )   end)
 	)
 )
 
@@ -145,14 +158,14 @@ volwidget:buttons(awful.util.table.join(
     end),
     
     -- ALSA
-    --awful.button({ }, 3, function () awful.util.spawn(terminal .. " -e alsamixer", true) end),
-    --awful.button({ }, 4, function () awful.util.spawn("amixer -q set Master 1dB+", false) end),
-    --awful.button({ }, 5, function () awful.util.spawn("amixer -q set Master 1dB-", false) end)
+    --awful.button({ }, 3, function () awful.spawn(terminal .. " -e alsamixer", true) end),
+    --awful.button({ }, 4, function () awful.spawn("amixer -q set Master 1dB+", false) end),
+    --awful.button({ }, 5, function () awful.spawn("amixer -q set Master 1dB-", false) end)
 
     -- PulseAudio
-    awful.button({ }, 3, function () awful.util.spawn("pavucontrol", true) end),
-    awful.button({ }, 4, function () awful.util.spawn("amixer -D pulse sset Master 5%+ > /dev/null", false) end),
-    awful.button({ }, 5, function () awful.util.spawn("amixer -D pulse sset Master 5%- > /dev/null", false) end)
+    awful.button({ }, 3, function () awful.spawn("pavucontrol", true) end),
+    awful.button({ }, 4, function () awful.spawn("amixer -D pulse sset Master 5%+ > /dev/null", false) end),
+    awful.button({ }, 5, function () awful.spawn("amixer -D pulse sset Master 5%- > /dev/null", false) end)
 ))
 
 -- Battery widget
@@ -184,7 +197,7 @@ vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 	end, 1.5, "BAT0")
 
 -- batterywidget:buttons(awful.util.table.join(
---     awful.button({ }, 1, function () awful.util.spawn("sudo powertop", false) 
+--     awful.button({ }, 1, function () awful.spawn("sudo powertop", false) 
 --     end)
 -- ))
 
@@ -221,12 +234,6 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua",
     -- os.getenv("HOME"), config.context.theme)
     os.getenv("HOME"), "default")
 beautiful.init(theme_path)
-
-
--- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -384,11 +391,10 @@ globalkeys = gears.table.join(
 
     -- Lock screen
     awful.key({ modkey, "Ctrl" }, "l", function () 
-	    --awful.util.spawn_with_shell("~/.config/awesome/locker") end,
-              -- awful.util.spawn("sync")
-              -- awful.util.spawn("xautolock -locknow")
-                awful.util.spawn("dm-tool lock")
-      end,
+	    --awful.spawn_with_shell("~/.config/awesome/locker") end,
+      awful.spawn("sync")
+      awful.spawn("dm-tool lock")
+    end,
     	{description = "Lock screen", group = "awesome"}),
 
     -- Layout manipulation
@@ -453,7 +459,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
     -- Rofi
-    awful.key({ modkey, "Shift" }, "r", function () awful.util.spawn("rofi -show drun") end)
+    awful.key({ modkey, "Shift" }, "r", function () awful.spawn("rofi -show drun") end)
 )
 
 clientkeys = gears.table.join(
@@ -672,13 +678,19 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Autorun
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
-awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru &") 
-awful.spawn.with_shell("nm-applet &") 
-awful.spawn.with_shell("blueman-applet &") 
-awful.spawn.with_shell("/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh &") 
+awful.spawn(os.getenv("HOME") .. "/.config/awesome/autorun.sh")
 -- Screen layout
-awful.spawn.with_shell("~/.screenlayout/home.sh &") 
+-- awful.spawn(os.getenv("HOME") .. "/.screenlayout/home.sh")
+-- Language layputs
+awful.spawn("setxkbmap -option grp:'alt_shift_toggle' -layout 'us,ru'") 
+-- Network applet
+awful.spawn("nm-applet")
+-- Bluetooth applet
+awful.spawn("blueman-applet")
+-- Clipboard manager
+awful.spawn("parcellite")
+-- Gnome keyring daemon
+awful.spawn("/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh")
 -- Compositor
-awful.spawn.with_shell("compton -b -c --backend xrender --vsync none &") 
+awful.spawn("compton -b -c --backend xrender --vsync none")
 -- }}}
